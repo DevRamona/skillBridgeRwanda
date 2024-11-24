@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useAuthContext } from "./useAuthHook";
+import { useSkillBridgeContext} from "./useSkillBridgeContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export const useSignUp = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { dispatch } = useAuthContext();
+  const { dispatch } = useSkillBridgeContext();
   const navigate = useNavigate();
 
   const signUp = async (

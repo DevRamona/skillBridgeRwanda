@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Card from "./Card";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useState } from "react-router-dom";
+import { useSkillBridgeContext } from "../context/SkillBridgeContext"; // Import the context
 
 const CourseList = () => {
-  const [courses, setCourses] = useState([]);
+  const { courses, setCourses } = useSkillBridgeContext(); // Use the context
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const CourseList = () => {
     const fetchCourses = async () => {
       try {
         const response = await axios.get("/api/courses"); // Replace with your API endpoint
-        setCourses(response.data);
+        setCourses(response.data); // Set courses in context
       } catch (err) {
         setError("Failed to fetch courses");
       } finally {
@@ -22,7 +23,7 @@ const CourseList = () => {
     };
 
     fetchCourses();
-  }, []);
+  }, [setCourses]);
 
   const handleCardClick = (id) => {
     navigate(`/courses/${id}`); // Navigate to the course detail page
@@ -36,7 +37,7 @@ const CourseList = () => {
       {courses.length > 0 ? (
         courses.map((course) => (
           <div key={course.id} className="col-span-1 p-0 sm:p-4 md:p-2">
-            <Card data={course} onClick={handleCardClick} />
+            <Card data={course} type="course" onClick={handleCardClick} />
           </div>
         ))
       ) : (

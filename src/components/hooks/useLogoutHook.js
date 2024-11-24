@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
-import { useAuthContext } from "./useAuthHook";
+import { useSkillBridgeContext } from "./useSkillBridgeContext";
 
 export const useLogout = () => {
-  const { dispatch } = useAuthContext();
+  const { dispatch } = useSkillBridgeContext();
   const logout = () => {
     localStorage.removeItem("user");
 

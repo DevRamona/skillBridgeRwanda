@@ -4,16 +4,17 @@ import React, { useState, useEffect } from "react";
 import { useLogout } from "../components/hooks/useLogoutHook";
 import { Link } from "react-router-dom";
 import { AiOutlineClose, AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
-import { useAuthContext } from "./hooks/useAuthHook";
+import { useAuthContext } from "../context/authContext";
 import { handleSearch } from "../utils/helpers";
-import { useHospitals } from "./hooks";
+import useSkillBridgeData from "./hooks/useSkillBridgeData";
+
 
 const Navbar = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [nav, setNav] = useState(false);
   const { logout } = useLogout();
   const { user } = useAuthContext();
-  const { data, searchValue, setSearchValue, setFilteredData } = useHospitals();
+  const { data, searchValue, setSearchValue, setFilteredData } = useSkillBridgeData();
 
   useEffect(() => {
     if (window.location.pathname === "/") {
@@ -70,6 +71,12 @@ const Navbar = () => {
             <Link to="/" className="p-4">
               Home
             </Link>
+            <Link to="/" className="p-4">
+              About
+            </Link>
+            <Link to="/" className="p-4">
+              Services
+            </Link>
             {user ? (
               <Link to="/" className="p-4" onClick={handleLogout}>
                 Logout
@@ -111,6 +118,12 @@ const Navbar = () => {
                 className="p-4 border-b border-gray-600 rounded-sm hover:font-bold hover:text-2xl w-full px-4"
               >
                 Register
+              </Link>
+              <Link
+                to="/register-user"
+                className="p-4 border-b border-gray-600 rounded-sm hover:font-bold hover:text-2xl w-full px-4"
+              >
+                Login
               </Link>
               <Link
                 to="/login-user"

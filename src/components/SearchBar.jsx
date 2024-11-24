@@ -4,7 +4,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { useHospitalsData } from "./hooks";
 
 const SearchBar = () => {
-  const { data, fetchHospitals } = useHospitalsData;
+  const { fetchHospitals } = useHospitalsData;
   const handleChange = (e) => {};
   const handleSearch = async () => {
     fetchHospitals();
