@@ -3,54 +3,53 @@ import Card from "./Card";
 import Footer from "./Footer";
 import Header from "./Header";
 import Navbar from "./Navbar";
-import { useHospitals } from "./hooks";
+import { useSkillBridgeData } from "./hooks/useSkillBridgeData";
 
 const Home = () => {
-  const { data, filteredData } = useHospitals();
+  const { courses, jobMatching, careerGuidance, progressTracking } = useSkillBridgeData();
 
-  const shuffleArray = (array) => {
-    const shuffled = array.slice();
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  };
-
-  const noFilteredHospitals = () => {
-    if (data && data.length > 0) {
-      const shuffledData = shuffleArray(data); // Shuffle the data array
-      const hospitalsToDisplay = shuffledData.slice(0, 6);
-
-      return hospitalsToDisplay.map((hospital) => (
-        <div key={hospital._id} className="col-span-1 p-0 sm:p-4 md:p-2">
-          <Card data={hospital} />
-        </div>
-      ));
-    } else {
-      return <span>No Hospital available</span>;
-    }
-  };
-
-  const filteredHospitals = () => {
-    return filteredData.map((hospital) => (
-      <div key={hospital._id} className="col-span-1 p-0 sm:p-4 md:p-2">
-        <Card data={hospital} />
+  const renderCourses = () => {
+    return courses.map((course) => (
+      <div key={course.id} className="col-span-1 p-0 sm:p-4 md:p-2">
+        <Card data={course} />
       </div>
     ));
   };
 
-  const renderHospitals = filteredData.length
-    ? filteredHospitals()
-    : noFilteredHospitals();
+  const renderJobMatching = () => {
+    return jobMatching.map((job) => (
+      <div key={job.id} className="col-span-1 p-0 sm:p-4 md:p-2">
+        <Card data={job} />
+      </div>
+    ));
+  };
+
+  const renderCareerGuidance = () => {
+    return careerGuidance.map((guidance) => (
+      <div key={guidance.id} className="col-span-1 p-0 sm:p-4 md:p-2">
+        <Card data={guidance} />
+      </div>
+    ));
+  };
+
+  const renderProgressTracking = () => {
+    return progressTracking.map((progress) => (
+      <div key={progress.id} className="col-span-1 p-0 sm:p-4 md:p-2">
+        <Card data={progress} />
+      </div>
+    ));
+  };
 
   return (
     <>
       <Navbar />
       <Header />
-      <div className=" xl:px-36">
+      <div className="xl:px-36">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 justify-center">
-          {renderHospitals}
+          {renderCourses()}
+          {renderJobMatching()}
+          {renderCareerGuidance()}
+          {renderProgressTracking()}
         </div>
       </div>
       <Footer />

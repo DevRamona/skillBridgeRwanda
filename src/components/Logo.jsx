@@ -1,5 +1,5 @@
 const Logo = () => {
-  return <h1>Kira Services</h1>;
+  return <h1>SkillBridge Rwanda</h1>;
 };
 
 export default Logo;

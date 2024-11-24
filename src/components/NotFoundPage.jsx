@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const NotFoundPage = () => {
+export const NotFoundPage = () => {
   const Navigate = useNavigate();
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
