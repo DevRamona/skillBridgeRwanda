@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+// src/components/Login.jsx
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Import axios for making HTTP requests
 import Navbar from "./Navbar"; // Import Navbar
 import Footer from "./Footer"; // Import Footer
 
@@ -10,16 +12,36 @@ const Login = () => {
     password: "",
   });
 
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if the user is already logged in
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+      navigate("/"); // Redirect to home if already logged in
+    }
+  }, [navigate]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Logged in:", formData);
-    // Redirect to home page after successful login
-    navigate("/");
+    setError("");
+    setSuccess("");
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/auth/login", formData);
+      setSuccess("Login successful!");
+      localStorage.setItem("token", response.data.token); // Store the token in local storage
+      navigate("/"); // Redirect to home page after successful login
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed. Please try again.");
+    }
   };
 
   return (
@@ -28,6 +50,9 @@ const Login = () => {
       <div className="flex items-center justify-center min-h-screen p-4">
         <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
           <h2 className="text-2xl font-bold text-center text-[#068FFF] mb-6">Login</h2>
+          {isLoggedIn && <p className="text-green-500 text-center">You are already logged in!</p>}
+          {error && <p className="text-red-500 text-center">{error}</p>}
+          {success && <p className="text-green-500 text-center">{success}</p>}
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700 mb-2" htmlFor="email">Email</label>

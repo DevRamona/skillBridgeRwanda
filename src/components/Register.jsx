@@ -1,46 +1,83 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar"; // Import Navbar
-import Footer from "./Footer"; // Import Footer
+import axios from "axios"; 
+import Navbar from "./Navbar"; 
+import Footer from "./Footer"; 
 
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
+    role: "STUDENT", 
   });
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle registration logic here
-    console.log("Registered:", formData);
-    // Redirect to login page after successful registration
-    navigate("/login");
+    setError("");
+    setSuccess("");
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/auth/register", formData);
+      setSuccess("Registration successful! You can now log in.");
+      setFormData({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "", role: "STUDENT" }); // Reset form
+
+    
+      setTimeout(() => {
+        navigate("/login"); 
+      }, 2000); 
+    } catch (err) {
+      setError(err.response?.data?.message || "Registration failed. Please try again.");
+    }
   };
 
   return (
-    <div className="bg-[#f0f4ff]">
+    <div className="bg-[#f0f4ff] flex flex-col min-h-screen">
       <Navbar /> {/* Render Navbar */}
-      <div className="flex items-center justify-center min-h-screen p-4">
-        <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+      <div className="flex flex-1 items-center justify-center p-4">
+        <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md md:max-w-lg lg:max-w-xl">
           <h2 className="text-2xl font-bold text-center text-[#068FFF] mb-6">Register</h2>
+          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+          {success && <p className="text-green-500 text-center mb-4">{success}</p>}
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2" htmlFor="name">Name</label>
+              <label className="block text-gray-700 mb-2" htmlFor="firstName">First Name</label>
               <input
                 type="text"
-                name="name"
-                id="name"
-                value={formData.name}
+                name="firstName"
+                id="firstName"
+                value={formData.firstName}
                 onChange={handleChange}
                 required
-                className="w-full p-2 border border-gray-300 rounded"
+                className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#068FFF] focus:border-[#068FFF]"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 mb-2" htmlFor="lastName">Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+                className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#068FFF] focus:border-[#068FFF]"
               />
             </div>
             <div className="mb-4">
@@ -52,7 +89,7 @@ const Register = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full p-2 border border-gray-300 rounded"
+                className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#068FFF] focus:border-[#068FFF]"
               />
             </div>
             <div className="mb-4">
@@ -64,7 +101,7 @@ const Register = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full p-2 border border-gray-300 rounded"
+                className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#068FFF] focus:border-[#068FFF]"
               />
             </div>
             <div className="mb-4">
@@ -76,20 +113,34 @@ const Register = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
-                className="w-full p-2 border border-gray-300 rounded"
+                className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#068FFF] focus:border-[#068FFF]"
               />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 mb-2" htmlFor="role">Role</label>
+              <select
+                name="role"
+                id="role"
+                value={formData.role}
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#068FFF] focus:border-[#068FFF]"
+              >
+                <option value="STUDENT">Student</option>
+                <option value="TEACHER">Teacher</option>
+                <option value="ADMIN">Admin</option>
+              </select>
             </div>
             <button
               type="submit"
-              className="w-full bg-[#068FFF] text-white py-2 rounded hover:bg-blue-700 transition duration-300"
+              className="w-full bg-[#068FFF] text-white py-3 rounded hover:bg-blue-700 transition duration-300"
             >
               Register
             </button>
           </form>
-          <p className="mt-4 text-center">
+          <p className="mt-4 text-center text-sm text-gray-700">
             Already have an account?{" "}
             <span
-              className="text-[#068FFF] cursor-pointer"
+              className="text-[#068FFF] cursor-pointer underline"
               onClick={() => navigate("/login")}
             >
               Login here
@@ -97,7 +148,7 @@ const Register = () => {
           </p>
         </div>
       </div>
-      <Footer /> {/* Render Footer */}
+      <Footer /> {}
     </div>
   );
 };
