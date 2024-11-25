@@ -23,6 +23,7 @@ To get started with the application, follow these steps:
 1. **Clone the repository**:
    ```bash
 https://github.com/DevRamona/skillBridgeRwanda.git
+  
    ```
 
 
@@ -30,6 +31,7 @@ https://github.com/DevRamona/skillBridgeRwanda.git
 2. **Install dependencies**:
    ```bash
    npm install
+   
    ```
 
 3. **Start the development server**:
