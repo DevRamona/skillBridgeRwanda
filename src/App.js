@@ -20,8 +20,8 @@ const App = () => {
           <Route path="/courses/" element={<CourseList />} />
           <Route path="/job-matching/" element={<JobMatchingList />} />
           <Route path="/job-details/:id" element={<JobMatchingDetail />} />
-          <Route path="/career-guidance/:id" element={<CareerGuidanceList />} />
-          <Route path="/progress-tracking/:id" element={<ProgressTrackingDetail />} />
+          <Route path="/career-guidance" element={<CareerGuidanceList />} />
+          <Route path="/progress-tracking" element={<ProgressTrackingDetail />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
