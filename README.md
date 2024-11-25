@@ -22,24 +22,25 @@ To get started with the application, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-https://github.com/DevRamona/skillBridgeRwanda.git
-  
+   git clone https://github.com/DevRamona/skillBridgeRwanda.git
    ```
 
+2. **Navigate to the project directory**:
+   ```bash
+   cd skillBridgeRwanda
+   ```
 
-
-2. **Install dependencies**:
+3. **Install dependencies**:
    ```bash
    npm install
-   
    ```
 
-3. **Start the development server**:
+4. **Start the development server**:
    ```bash
    npm start
    ```
 
-4. **Open your browser** and navigate to `http://localhost:3000` to view the application.
+5. **Open your browser** and navigate to `http://localhost:3000` to view the application.
 
 ## Usage
 
@@ -49,16 +50,6 @@ https://github.com/DevRamona/skillBridgeRwanda.git
 - **Progress Tracking**: Add new progress items and view your career development activities.
 - **Courses**: Browse through available courses to improve your skills and knowledge in various fields.
 
-
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes and commit them (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Open a pull request.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-
