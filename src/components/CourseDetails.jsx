@@ -1,22 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "./Navbar"; // Import Navbar
 import Footer from "./Footer"; // Import Footer
 import { sampleCourses } from "../data/sampleCourses"; // Import the sample courses
+import Notification from "./Notification"; // Import Notification component
 
 const CourseDetails = () => {
   const { id } = useParams(); // Get the course ID from the URL
+  const [showNotification, setShowNotification] = useState(false); // State to manage notification visibility
 
   // Find the course based on the ID
   const course = sampleCourses.find((course) => course.id === id);
 
   if (!course) {
-    return <div>Course not found.</div>; // Handle case where course is not found
+    return (
+      <div className="bg-[#f0f4ff] flex items-center justify-center h-screen">
+        <h2 className="text-xl font-bold text-red-500">Course not found.</h2>
+      </div>
+    );
   }
+
+  const handleEnroll = () => {
+    setShowNotification(true);
+    const timeout = setTimeout(() => {
+      setShowNotification(false);
+    }, 3000);
+    
+    return () => clearTimeout(timeout); // Clear timeout on unmount
+  };
+  
 
   return (
     <div className="bg-[#f0f4ff]">
-      <Navbar />
+      <Navbar /> {/* Render Navbar */}
       <div className="container mx-auto p-6">
         <h2 className="text-3xl font-bold text-center text-[#068FFF] mb-4">{course.name}</h2>
         <img src={course.image} alt={course.name} className="w-full h-64 object-cover mb-4 rounded-lg" />
@@ -32,10 +48,20 @@ const CourseDetails = () => {
         </ul>
 
         <div className="text-center">
-          <button className="bg-[#068FFF] text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-300">
+          <button 
+            className="bg-[#068FFF] text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-300"
+            onClick={handleEnroll} // Handle enroll button click
+          >
             Enroll Now
           </button>
         </div>
+
+        {showNotification && (
+          <Notification 
+            message="You have been enrolled in the course!" 
+            onClose={() => setShowNotification(false)} 
+          />
+        )}
       </div>
       <Footer /> {/* Render Footer */}
     </div>

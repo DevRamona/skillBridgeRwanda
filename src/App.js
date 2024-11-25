@@ -9,6 +9,7 @@ import ProgressTrackingDetail from "./components/ProgressTrackingList"; // Creat
 import Register from "./components/Register";
 import Login from "./components/Login";
 import CourseDetails from "./components/CourseDetails";
+import JobMatchingList from "./components/JobMatchingList"; // Create this component
 
 const App = () => {
   return (
@@ -17,7 +18,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/courses/" element={<CourseList />} />
-          <Route path="/job-matching/:id" element={<JobMatchingDetail />} />
+          <Route path="/job-matching/" element={<JobMatchingList />} />
+          <Route path="/job-details/:id" element={<JobMatchingDetail />} />
           <Route path="/career-guidance/:id" element={<CareerGuidanceList />} />
           <Route path="/progress-tracking/:id" element={<ProgressTrackingDetail />} />
           <Route path="/register" element={<Register />} />
