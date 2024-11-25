@@ -5,8 +5,8 @@ export const AuthContext = createContext();
 
 // Create a provider component
 export const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // User state
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Authentication status
+  const [user, setUser] = useState(localStorage.getItem('user'));
+  const [isAuthenticated, setIsAuthenticated] = useState(false); 
 
   const login = (userData) => {
     setUser(userData);
@@ -15,7 +15,8 @@ export const AuthContextProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    setIsAuthenticated(false);
+    localStorage.removeItem('token');
+        setIsAuthenticated(false);
   };
 
   return (

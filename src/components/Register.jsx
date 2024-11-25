@@ -1,9 +1,9 @@
-
+// src/components/Register.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; 
-import Navbar from "./Navbar"; 
-import Footer from "./Footer"; 
+import axios from "axios"; // Import axios for making HTTP requests
+import Navbar from "./Navbar"; // Import Navbar
+import Footer from "./Footer"; // Import Footer
 
 const Register = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    role: "STUDENT", 
+    role: "student", // Default role in lowercase
   });
 
   const [error, setError] = useState("");
@@ -28,20 +28,23 @@ const Register = () => {
     setError("");
     setSuccess("");
 
+    // Validate that password and confirm password match
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/register", formData);
+      const response = await axios.post("http://localhost:3000/auth/register", formData);
+      console.log(response);
+      
       setSuccess("Registration successful! You can now log in.");
-      setFormData({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "", role: "STUDENT" }); // Reset form
+      setFormData({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "", role: "student" }); // Reset form
 
-    
+      // Redirect to login page after a short delay
       setTimeout(() => {
-        navigate("/login"); 
-      }, 2000); 
+        navigate("/login"); // Redirect to login page
+      }, 2000); // Redirect after 2 seconds
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed. Please try again.");
     }
@@ -125,9 +128,9 @@ const Register = () => {
                 onChange={handleChange}
                 className="w-full p-3 border border-gray-300 rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#068FFF] focus:border-[#068FFF]"
               >
-                <option value="STUDENT">Student</option>
-                <option value="TEACHER">Teacher</option>
-                <option value="ADMIN">Admin</option>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+                <option value="admin">Admin</option>
               </select>
             </div>
             <button
@@ -148,7 +151,7 @@ const Register = () => {
           </p>
         </div>
       </div>
-      <Footer /> {}
+      <Footer /> {/* Render Footer */}
     </div>
   );
 };

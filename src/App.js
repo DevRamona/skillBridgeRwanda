@@ -10,11 +10,14 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import CourseDetails from "./components/CourseDetails";
 import JobMatchingList from "./components/JobMatchingList"; // Create this component
+import {  AuthContextProvider } from "./context/authContext";
+import Profile from "./components/Profile";
 
 const App = () => {
   return (
     
       <SkillBridgeProvider>
+        <AuthContextProvider>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/courses/" element={<CourseList />} />
@@ -25,7 +28,10 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
+          <Route path="/profile" element={<Profile />} />
+
         </Routes>
+        </AuthContextProvider>
       </SkillBridgeProvider>
   
   );

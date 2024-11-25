@@ -23,6 +23,7 @@ export const SkillBridgeProvider = ({ children }) => { // Added export here
         setProgressTracking,
       }}
     >
+      
       {children}
     </SkillBridgeContext.Provider>
   );

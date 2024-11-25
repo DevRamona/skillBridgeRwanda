@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <div className="text-[#068FFF] bg-[#f0f4ff] m-0 p-0">
       {/* About Section and Image in Parallel */}
-      <div className="flex flex-col md:flex-row gap-8 p-8 items-center">
+      <div className="flex flex-col md:flex-row gap-8 p-24 items-center">
         {/* About Section */}
         <div className="flex flex-col flex-1 justify-center">
           <h2 className="text-black font-serif text-2xl md:text-3xl pb-4">
@@ -34,13 +34,13 @@ const Header = () => {
           </p>
           <div className="flex flex-col md:flex-row md:items-center">
             <button
-              className="bg-black text-white mt-4 px-6 py-2 rounded-lg md:mx-2 hover:bg-gray-800 transition duration-300"
+              className="bg-blue-500 text-white mt-4 px-6 py-2 rounded-lg md:mx-2 hover:bg-gray-800 transition duration-300"
               onClick={handleRegisterUser}
             >
               Sign Up as a Student
             </button>
             <button
-              className="bg-black text-white mt-4 px-6 py-2 rounded-lg md:mx-2 hover:bg-gray-800 transition duration-300"
+              className="bg-blue-500 text-white mt-4 px-6 py-2 rounded-lg md:mx-2 hover:bg-gray-800 transition duration-300"
               onClick={handleRegisterHospital}
             >
               Sign Up as an Employer
@@ -49,13 +49,13 @@ const Header = () => {
         </div>
 
         {/* Main Image Section */}
-        <div className="w-full md:w-[50%]">
-          <img
-            className="rounded-lg shadow-md object-cover w-full h-[400px] md:h-[500px]"
-            src="https://npf-unlayer.s3.ap-south-1.amazonaws.com/unlayer%2Fimages%2F1707221195018-SkillBridge+Application+Portal+Banner+Option+1+%282%29.png"
-            alt="SkillBridge"
-          />
-        </div>
+        <div className="w-full md:w-[55%] flex items-center justify-center">
+  <img
+    className="rounded-lg shadow-md object-contain w-full h-max max-h-[800px]"
+    src="https://npf-unlayer.s3.ap-south-1.amazonaws.com/unlayer%2Fimages%2F1707221195018-SkillBridge+Application+Portal+Banner+Option+1+%282%29.png"
+    alt="SkillBridge"
+  />
+</div>
       </div>
 
       {/* Centered Objectives Section */}

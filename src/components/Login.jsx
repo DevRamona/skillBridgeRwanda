@@ -35,9 +35,13 @@ const Login = () => {
     setSuccess("");
 
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", formData);
+      const response = await axios.post("http://localhost:3000/auth/login", formData);
+      console.log(response);
+      
       setSuccess("Login successful!");
-      localStorage.setItem("token", response.data.token); // Store the token in local storage
+      localStorage.setItem("token", response.data.access_token);// Store the token in local storage
+      localStorage.setItem("user", response.data.user);// Store the user in local storage
+
       navigate("/"); // Redirect to home page after successful login
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Please try again.");
@@ -55,7 +59,7 @@ const Login = () => {
           {success && <p className="text-green-500 text-center">{success}</p>}
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2" htmlFor="email">Email</label>
+              <label className="block text-black mb-2" htmlFor="email">Email</label>
               <input
                 type="email"
                 name="email"
@@ -63,11 +67,11 @@ const Login = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full p-2 border border-gray-300 rounded"
+                className="w-full p-2 border text-black border-gray-300 rounded"
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2" htmlFor="password">Password</label>
+              <label className="block text-black mb-2" htmlFor="password">Password</label>
               <input
                 type="password"
                 name="password"
@@ -75,7 +79,7 @@ const Login = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full p-2 border border-gray-300 rounded"
+                className="w-full p-2 border text-black border-gray-300 rounded"
               />
             </div>
             <button
