@@ -6,7 +6,7 @@ export const sampleCourses = [
       description: "Learn the basics of programming using Python.",
       image: "https://via.placeholder.com/150",
       duration: "4 weeks",
-      instructor: "John Doe",
+      instructor: "John Davis",
       syllabus: [
         "Week 1: Basics of Python",
         "Week 2: Control Structures",
@@ -20,7 +20,7 @@ export const sampleCourses = [
       description: "Become a full-stack web developer in 12 weeks.",
       image: "https://via.placeholder.com/150",
       duration: "12 weeks",
-      instructor: "Jane Smith",
+      instructor: "Janet Wesigye",
       syllabus: [
         "HTML & CSS",
         "JavaScript Basics",

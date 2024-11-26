@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "./Navbar"; // Import Navbar
-import Footer from "./Footer"; // Import Footer
-import { sampleCourses } from "../data/sampleCourses"; // Import the sample courses
-import Notification from "./Notification"; // Import Notification component
+import Navbar from "./Navbar"; 
+import Footer from "./Footer"; 
+import { sampleCourses } from "../data/sampleCourses"; 
+import Notification from "./Notification"; 
 
 const CourseDetails = () => {
-  const { id } = useParams(); // Get the course ID from the URL
-  const [showNotification, setShowNotification] = useState(false); // State to manage notification visibility
+  const { id } = useParams(); 
+  const [showNotification, setShowNotification] = useState(false); 
 
-  // Find the course based on the ID
+  
   const course = sampleCourses.find((course) => course.id === id);
 
   if (!course) {
@@ -26,7 +26,7 @@ const CourseDetails = () => {
       setShowNotification(false);
     }, 3000);
     
-    return () => clearTimeout(timeout); // Clear timeout on unmount
+    return () => clearTimeout(timeout); 
   };
   
 
@@ -36,11 +36,11 @@ const CourseDetails = () => {
       <div className="container mx-auto p-6">
         <h2 className="text-3xl font-bold text-center text-[#068FFF] mb-4">{course.name}</h2>
         <img src={course.image} alt={course.name} className="w-full h-64 object-cover mb-4 rounded-lg" />
-        <p className="text-gray-600 mb-4">{course.description}</p>
+        <p className="text-gray-600 text-blue-800 font-semibold mb-4">{course.description}</p>
         <p className="text-gray-500">Duration: <span className="font-semibold">{course.duration}</span></p>
         <p className="text-gray-500">Instructor: <span className="font-semibold">{course.instructor}</span></p>
         
-        <h3 className="text-2xl font-semibold mt-6">Syllabus</h3>
+        <h3 className="text-2xl text-blue-800 font-semibold mt-6">Syllabus</h3>
         <ul className="list-disc list-inside mt-2 mb-4">
           {course.syllabus.map((item, index) => (
             <li key={index} className="text-gray-600">{item}</li>
