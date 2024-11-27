@@ -1,33 +1,27 @@
 
 export const sampleCourses = [
-    {
-      id: "1",
-      name: "Introduction to Programming",
-      description: "Learn the basics of programming using Python.",
-      image: "https://via.placeholder.com/150",
-      duration: "4 weeks",
-      instructor: "John Davis",
-      syllabus: [
-        "Week 1: Basics of Python",
-        "Week 2: Control Structures",
-        "Week 3: Functions and Modules",
-        "Week 4: Final Project"
-      ]
-    },
-    {
-      id: "2",
-      name: "Web Development Bootcamp",
-      description: "Become a full-stack web developer in 12 weeks.",
-      image: "https://via.placeholder.com/150",
-      duration: "12 weeks",
-      instructor: "Janet Wesigye",
-      syllabus: [
-        "HTML & CSS",
-        "JavaScript Basics",
-        "Frontend Frameworks",
-        "Backend Development",
-        "Databases",
-        "Deployment"
-      ]
-    }
+  {
+    id: 1,
+    title: "Web Development Bootcamp",
+    description: "Master HTML, CSS, and JavaScript to build responsive websites.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWJNItq1ncXuPwhiW3sWVUzpp3wQ4xNJcf_A&s",
+  },
+  {
+    id: 2,
+    title: "Data Science and Machine Learning",
+    description: "Learn data analysis, visualization, and machine learning techniques.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6o-Kk1Fk-G0SniZ0dq85C6tQcEdhfSTuIZA&s",
+  },
+  {
+    id: 3,
+    title: "Digital Marketing Mastery",
+    description: "Understand SEO, social media, and content marketing strategies.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShSlvCV7J6xoLxeaIxdh2zVO5Gpt3jKacjwg&s",
+  },
+  {
+    id: 4,
+    title: "Graphic Design Essentials",
+    description: "Learn the fundamentals of graphic design using Adobe tools.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIxw1YfIy0UJAZ-TJJgiw4xbYpCTjMVYlxg&s",
+  },
   ];
