@@ -4,7 +4,7 @@ export const sampleCourses = [
     id: 1,
     title: "Web Development Bootcamp",
     description: "Master HTML, CSS, and JavaScript to build responsive websites.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWJNItq1ncXuPwhiW3sWVUzpp3wQ4xNJcf_A&s",
+    image: "https://plus.unsplash.com/premium_photo-1723849222657-e1e48a0a306e?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8d2ViJTIwZGV2ZWxvcG1lbnQlMjBib290Y2FtcHxlbnwwfHwwfHx8MA%3D%3D",
   },
   {
     id: 2,

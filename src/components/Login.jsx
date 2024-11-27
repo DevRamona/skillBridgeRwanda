@@ -39,8 +39,9 @@ const Login = () => {
       console.log(response);
       
       setSuccess("Login successful!");
+      
       localStorage.setItem("token", response.data.access_token);// Store the token in local storage
-      localStorage.setItem("user", response.data.user);// Store the user in local storage
+      localStorage.setItem("user", JSON.stringify(response.data.user));// Store the user in local storage
 
       navigate("/"); // Redirect to home page after successful login
     } catch (err) {

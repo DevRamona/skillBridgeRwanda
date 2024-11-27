@@ -42,13 +42,7 @@ const CoursesPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // For the duration, validate to ensure it is a positive number
-    if (name === "duration") {
-      const numericValue = value.replace(/\D/g, ""); // Allow only numbers
-      setCourseData((prevData) => ({ ...prevData, [name]: numericValue }));
-    } else {
       setCourseData((prevData) => ({ ...prevData, [name]: value }));
-    }
   };
 
   const handleSubmit = async (e) => {
@@ -62,7 +56,7 @@ const CoursesPage = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/courses", courseData);
+      const response = await axios.post("http://localhost:3000/courses", {...courseData, duration: parseInt(courseData.duration)});
       console.log(response)
       setCourses((prevCourses) => [...prevCourses, response.data]);
       setSuccess("Course added successfully!");
@@ -71,6 +65,8 @@ const CoursesPage = () => {
         description: "",
         duration: "",
         level: "",
+        learningPathId: "",
+        instructor: "",
       });
     } catch (err) {
       setError("Failed to add course. Please try again.");
@@ -90,74 +86,110 @@ const CoursesPage = () => {
           {error && <p className="text-red-500 mb-3">{error}</p>}
           {success && <p className="text-green-500 mb-3">{success}</p>}
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-blue-700 text-sm mb-1" htmlFor="title">
-                Course Title
-              </label>
-              <input
-                type="text"
-                name="title"
-                id="title"
-                value={courseData.title}
-                onChange={handleChange}
-                required
-                placeholder="Enter course title"
-                className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
-              />
-            </div>
-            <div>
-              <label className="block text-blue-700 text-sm mb-1" htmlFor="level">
-                Level
-              </label>
-              <input
-                type="text"
-                name="level"
-                id="level"
-                value={courseData.level}
-                onChange={handleChange}
-                required
-                placeholder="e.g., Beginner, Intermediate"
-                className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
-              />
-            </div>
-            <div className="md:col-span-2">
-              <label className="block text-blue-700 text-sm mb-1" htmlFor="description">
-                Description
-              </label>
-              <textarea
-                name="description"
-                id="description"
-                value={courseData.description}
-                onChange={handleChange}
-                required
-                placeholder="Brief course description"
-                className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
-              />
-            </div>
-            <div>
-              <label className="block text-blue-700 text-sm mb-1" htmlFor="duration">
-                Duration (hours)
-              </label>
-              <input
-                type="text"
-                name="duration"
-                id="duration"
-                value={courseData.duration}
-                onChange={handleChange}
-                required
-                placeholder="Enter duration in hours"
-                className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
-              />
-            </div>
-            <div className="md:col-span-2 text-right">
-              <button
-                type="submit"
-                className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-300"
-              >
-                Add Course
-              </button>
-            </div>
-          </form>
+  <div>
+    <label className="block text-blue-700 text-sm mb-1" htmlFor="title">
+      Course Title
+    </label>
+    <input
+      type="text"
+      name="title"
+      id="title"
+      value={courseData.title}
+      onChange={handleChange}
+      required
+      placeholder="Enter course title"
+      className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+    />
+  </div>
+  
+  <div>
+    <label className="block text-blue-700 text-sm mb-1" htmlFor="level">
+      Level
+    </label>
+    <input
+      type="text"
+      name="level"
+      id="level"
+      value={courseData.level}
+      onChange={handleChange}
+      required
+      placeholder="e.g., Beginner, Intermediate"
+      className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+    />
+  </div>
+
+  <div>
+    <label className="block text-blue-700 text-sm mb-1" htmlFor="instructor">
+      Instructor
+    </label>
+    <input
+      type="text"
+      name="instructor"
+      id="instructor"
+      value={courseData.instructor}
+      onChange={handleChange}
+      required
+      placeholder="Enter instructor name"
+      className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+    />
+  </div>
+
+  <div>
+    <label className="block text-blue-700 text-sm mb-1" htmlFor="learningPathId">
+      Learning Path ID
+    </label>
+    <input
+      type="text"
+      name="learningPathId"
+      id="learningPathId"
+      value={courseData.learningPathId}
+      onChange={handleChange}
+      required
+      placeholder="Enter learning path ID"
+      className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+    />
+  </div>
+
+  <div className="md:col-span-2">
+    <label className="block text-blue-700 text-sm mb-1" htmlFor="description">
+      Description
+    </label>
+    <textarea
+      name="description"
+      id="description"
+      value={courseData.description}
+      onChange={handleChange}
+      required
+      placeholder="Brief course description"
+      className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+    />
+  </div>
+
+  <div>
+    <label className="block text-blue-700 text-sm mb-1" htmlFor="duration">
+      Duration (in days)
+    </label>
+    <input
+      type="text"
+      name="duration"
+      id="duration"
+      value={courseData.duration}
+      onChange={handleChange}
+      required
+      placeholder="Enter duration in days"
+      className="w-full p-3 border border-gray-300 rounded text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+    />
+  </div>
+
+  <div className="md:col-span-2 text-right">
+    <button
+      type="submit"
+      className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-300"
+    >
+      Add Course
+    </button>
+  </div>
+</form>
         </div>
 
         {/* Courses List Section */}
