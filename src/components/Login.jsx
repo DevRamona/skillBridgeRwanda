@@ -91,7 +91,8 @@ const Login = () => {
               type="submit"
               className="w-full bg-[#068FFF] text-white py-2 rounded hover:bg-blue-700 transition duration-300"
             >
-              Login
+                            {isSubmitting ? "Loading..." : "Register here"}
+
             </button>
           </form>
           <p className="mt-4 text-center">
@@ -100,7 +101,7 @@ const Login = () => {
               className="text-[#068FFF] cursor-pointer"
               onClick={() => navigate("/register")}
             >
-              {isSubmitting ? "Loading..." : "Register here"}
+              Register
             </span>
           </p>
         </div>
