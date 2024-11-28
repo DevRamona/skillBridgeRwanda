@@ -11,6 +11,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -35,6 +36,8 @@ const Login = () => {
     setSuccess("");
 
     try {
+      console.log("Trying to login....");
+      
       const response = await axios.post("https://skillbridgerwanda-backend-7.onrender.com/auth/login", formData);
       console.log(response);
       
@@ -46,7 +49,8 @@ const Login = () => {
       navigate("/"); // Redirect to home page after successful login
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Please try again.");
-    }
+    }finally{
+      setIsSubmitting(false);}
   };
 
   return (
@@ -96,7 +100,7 @@ const Login = () => {
               className="text-[#068FFF] cursor-pointer"
               onClick={() => navigate("/register")}
             >
-              Register here
+              {isSubmitting ? "Loading..." : "Register here"}
             </span>
           </p>
         </div>
