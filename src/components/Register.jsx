@@ -35,7 +35,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/auth/register", formData);
+      const response = await axios.post("https://skillbridgerwanda-backend-7.onrender.com/auth/register", formData);
       console.log(response);
       
       setSuccess("Registration successful! You can now log in.");

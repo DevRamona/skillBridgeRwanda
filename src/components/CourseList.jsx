@@ -56,7 +56,7 @@ const CoursesPage = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/courses", {...courseData, duration: parseInt(courseData.duration)});
+      const response = await axios.post("https://skillbridgerwanda-backend-7.onrender.com/courses", {...courseData, duration: parseInt(courseData.duration)});
       console.log(response)
       setCourses((prevCourses) => [...prevCourses, response.data]);
       setSuccess("Course added successfully!");

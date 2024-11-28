@@ -35,7 +35,7 @@ const Login = () => {
     setSuccess("");
 
     try {
-      const response = await axios.post("http://localhost:3000/auth/login", formData);
+      const response = await axios.post("https://skillbridgerwanda-backend-7.onrender.com/auth/login", formData);
       console.log(response);
       
       setSuccess("Login successful!");
