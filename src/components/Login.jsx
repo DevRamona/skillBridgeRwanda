@@ -39,6 +39,7 @@ const Login = () => {
       console.log("Trying to login....");
       
       const response = await axios.post("https://skillbridgerwanda-backend-7.onrender.com/auth/login", formData);
+      console.log(formData)
       console.log(response);
       
       setSuccess("Login successful!");
