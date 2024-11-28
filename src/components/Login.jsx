@@ -90,6 +90,7 @@ const Login = () => {
               />
             </div>
             <button
+            disabled={isSubmitting}
               type="submit"
               className="w-full bg-[#068FFF] text-white py-2 rounded hover:bg-blue-700 transition duration-300"
             >
